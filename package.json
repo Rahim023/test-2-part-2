@@ -1,0 +1,10 @@
+{
+  "name": "fullstack-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run frontend\"",
+    "server": "cd backend && node server.js",
+    "frontend": "cd frontend && npm start"
+  }
+}

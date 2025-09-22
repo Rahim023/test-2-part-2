@@ -1,0 +1,15 @@
+/* Basic clean styles */
+body { font-family: Arial, Helvetica, sans-serif; background: #000d21; margin: 0; padding: 0; }
+.auth-page { display:flex; align-items:center; justify-content:center; min-height:100vh; }
+.card { width: 360px; background: white; padding: 24px; border-radius: 12px; box-shadow: 0 6px 18px rgba(217, 183, 142, 0.08); }
+.card h2 { margin-top:0; text-align:center; }
+.card label { display:block; margin-top:12px; font-size:14px; color:#333; }
+.card input { width:100%; padding:10px; margin-top:6px; border-radius:6px; border:1px solid #e3e8ef; }
+.btn { width:100%; padding:12px; margin-top:16px; border-radius:8px; background: linear-gradient(90deg,#bcbcdd,#0f4ca7); color:white; border:none; cursor:pointer; font-weight:600; }
+.small-links { display:flex; justify-content:space-between; margin-top:12px; font-size:13px; }
+.error { background:#ffe6e6; color:#900; padding:8px; border-radius:6px; margin-bottom:12px; }
+.info { background:#eef6ff; color:#03396b; padding:8px; border-radius:6px; margin-bottom:12px; }
+.page { padding:20px; }
+.topbar { display:flex; justify-content:space-between; align-items:center; padding:12px 20px; background:white; border-radius:8px; box-shadow: 0 3px 8px rgba(20,30,50,0.06); }
+.btn.small { padding:8px 12px; width:auto; margin-left:12px; background: #ef4444; }
+.content { margin-top:16px; background:white; padding:20px; border-radius:8px; box-shadow: 0 3px 8px rgba(20,30,50,0.03); }
