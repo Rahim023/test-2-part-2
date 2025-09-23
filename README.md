@@ -1,6 +1,7 @@
 # MERN Auth Example
 
 This project contains a simple MERN-stack example using:
+**This is my code for all the Previous lab and test i have done evryhting collectively and created  a final version of my project**
 - MongoDB (mongoose)
 - creates a basic structure of my project **(Done by Copilot)**
 - Express backend (JWT auth)
