@@ -1,24 +1,19 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import ForgotPassword from './pages/ForgotPassword';
-import DiscussionBoard from './pages/DiscussionBoard';
-import './styles.css';
+import React from "react";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App";
+import { AuthProvider } from "./context/AuthContext";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function App() {
-  return (
+const container = document.getElementById("root");
+const root = createRoot(container);
+
+root.render(
+  <React.StrictMode>
     <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Login />} />
-        <Route path='/signup' element={<Signup />} />
-        <Route path='/forgot' element={<ForgotPassword />} />
-        <Route path='/discussion' element={<DiscussionBoard />} />
-        <Route path='*' element={<Navigate to='/' />} />
-      </Routes>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
     </BrowserRouter>
-  );
-}
-
-createRoot(document.getElementById('root')).render(<App />);
+  </React.StrictMode>
+);

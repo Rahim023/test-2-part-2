@@ -1,19 +1,26 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import API from "../services/api";
+import { AuthContext } from "../context/AuthContext";
 
-export default function ForgotPassword() {
+export default function Register() {
+  const navigate = useNavigate();
+  const { setAuthUser } = useContext(AuthContext);
+
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [msg, setMsg] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const onSubmit = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    setMsg("");
     try {
-      const res = await API.post("/auth/forgot-password", { email });
-      setMsg(res.data.message || "If that email exists, a reset link was sent.");
-    } catch (error) {
-      setMsg("Request failed");
+      const res = await API.post("/auth/register", { name, email, password });
+      localStorage.setItem("token", res.data.token);
+      setAuthUser(res.data.user);
+      navigate("/");
+    } catch (err) {
+      setError(err.response?.data?.message || "Registration failed");
     }
   };
 
@@ -45,16 +52,29 @@ export default function ForgotPassword() {
           e.currentTarget.style.boxShadow = "0 0 15px rgba(255,0,128,0.4)";
         }}
       >
-        <h3 className="text-center mb-3 fw-bold">Forgot Password</h3>
-        {msg && <div className="alert alert-info">{msg}</div>}
-        <form onSubmit={onSubmit} className="d-flex flex-column gap-3">
+        <h3 className="text-center mb-3 fw-bold">Register</h3>
+        {error && <div className="alert alert-danger">{error}</div>}
+        <form onSubmit={handleRegister} className="d-flex flex-column gap-3">
+          <input
+            type="text"
+            className="form-control bg-dark text-white border-0"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
           <input
             type="email"
             className="form-control bg-dark text-white border-0"
-            placeholder="Enter your email"
+            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
+          />
+          <input
+            type="password"
+            className="form-control bg-dark text-white border-0"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <button
             className="btn fw-bold"
@@ -76,14 +96,15 @@ export default function ForgotPassword() {
               e.currentTarget.style.transform = "scale(1)";
             }}
           >
-            Send Reset Link
+            Register
           </button>
         </form>
-        <div className="text-center mt-3">
+        <p className="mt-3 text-center">
+          Already have an account?{" "}
           <Link to="/login" className="fw-bold text-light">
-            Back to Login
+            Login
           </Link>
-        </div>
+        </p>
       </div>
     </div>
   );
