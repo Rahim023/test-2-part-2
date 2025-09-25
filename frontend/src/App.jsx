@@ -4,28 +4,34 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
 import DiscussionBoard from "./pages/DiscussionBoard";
-import { AuthContext } from "./context/AuthContext"; // ✅ use context directly
+import HeroSection from "./pages/HeroSection";
+import ThreeColumnSection from "./pages/ThreeColumnSection";
+import Footer from "./components/Footer";
+import { AuthContext } from "./context/AuthContext";
 import "./styles.css";
 
 function App() {
   const { authUser } = useContext(AuthContext);
 
   return (
-    <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/forgot" element={<ForgotPassword />} />
+    <>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/forgot" element={<ForgotPassword />} />
 
-      {/* protect discussion route inline */}
-      <Route
-        path="/discussion"
-        element={
-          authUser ? <DiscussionBoard /> : <Navigate to="/" replace />
-        }
-      />
+        <Route
+          path="/discussion"
+          element={authUser ? <DiscussionBoard /> : <Navigate to="/" replace />}
+        />
+        <Route path="/hero" element={<HeroSection />} />
+        <Route path="/three-column" element={<ThreeColumnSection />} />
 
-      <Route path="*" element={<Navigate to="/" />} />
-    </Routes>
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+
+      <Footer />
+    </>
   );
 }
 

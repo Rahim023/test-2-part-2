@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import API from "../services/api";
 import PostCard from "../components/PostCard";
+import NavbarComponent from "../components/NavbarComponent";
 
 export default function DiscussionBoard() {
-  const navigate = useNavigate();
   const storedUser = JSON.parse(localStorage.getItem("user") || "null");
   const [authUser, setAuthUser] = useState(storedUser);
+
   const [topic, setTopic] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
@@ -22,9 +22,9 @@ export default function DiscussionBoard() {
   });
 
   useEffect(() => {
-    if (!authUser) navigate("/login");
+    if (!authUser) window.location.href = "/";
     else fetchPosts();
-  }, [authUser, navigate]);
+  }, [authUser]);
 
   const fetchPosts = async () => {
     try {
@@ -33,7 +33,7 @@ export default function DiscussionBoard() {
       setAllPosts(res.data || []);
       setLoading(false);
     } catch (err) {
-      console.error("fetchPosts error:", err);
+      console.error(err);
       setLoading(false);
     }
   };
@@ -47,8 +47,7 @@ export default function DiscussionBoard() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    setAuthUser(null);
-    navigate("/login");
+    window.location.href = "/";
   };
 
   const handlePost = async (e) => {
@@ -131,37 +130,20 @@ export default function DiscussionBoard() {
   );
   const displayPosts = viewYourPosts ? userPosts : allPosts;
 
+
   return (
     <div style={{ backgroundColor: "#000", minHeight: "100vh", paddingBottom: 40 }}>
-      {/* Header */}
-      <div
-        className="d-flex justify-content-between align-items-center mb-4 px-3"
-        style={{
-          background: "linear-gradient(90deg, #ff6ec7, #ff0080)",
-          padding: "10px 20px",
-        }}
-      >
-        <div style={{ flex: 1, textAlign: "center" }}>
-          <h2 style={{ color: "#fff", fontSize: "2.2rem", margin: 0 }}>Discussion Board</h2>
-        </div>
-        <button
-          onClick={handleLogout}
-          style={{
-            background: "transparent",
-            color: "#fff",
-            border: "1px solid #ff4d4d",
-            padding: "6px 12px",
-            borderRadius: "8px",
-          }}
-        >
-          Logout
-        </button>
-      </div>
+      <NavbarComponent handleLogout={handleLogout} />
 
       <div className="container-fluid py-4">
         <div className="row gx-4">
           {/* LEFT - Create Post */}
-          <div className="col-12 col-lg-4 mb-4">
+          <motion.div
+            className="col-12 col-lg-4 mb-4"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+          >
             <div
               className="card shadow-sm p-3"
               style={{ backgroundColor: "#121212", color: "white", borderRadius: 12 }}
@@ -201,10 +183,15 @@ export default function DiscussionBoard() {
                 </button>
               </form>
             </div>
-          </div>
+          </motion.div>
 
           {/* RIGHT - Posts */}
-          <div className="col-12 col-lg-8">
+          <motion.div
+            className="col-12 col-lg-8"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+          >
             <div
               className="p-3"
               style={{ backgroundColor: "#0f0f10", color: "white", borderRadius: 12 }}
@@ -249,23 +236,32 @@ export default function DiscussionBoard() {
               ) : displayPosts.length === 0 ? (
                 <div style={{ padding: 20, color: "#bbb" }}>No posts to show.</div>
               ) : (
-                <div className="row g-3">
-                  {displayPosts.map((post) => (
-                    <div key={post._id} className="col-12 col-md-6 col-lg-4 d-flex">
-                      <PostCard
-                        post={post}
-                        authUser={authUser}
-                        onLike={handleLike}
-                        onComment={handleComment}
-                        onDelete={handleDelete}
-                        isUserPost={(post.userId || post.user?._id || post.user?.id)?.toString() === uid}
-                      />
-                    </div>
-                  ))}
-                </div>
+                <AnimatePresence>
+                  <div className="row g-3">
+                    {displayPosts.map((post) => (
+                      <motion.div
+                        key={post._id}
+                        className="col-12 col-md-6 col-lg-4 d-flex"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 20 }}
+                        transition={{ duration: 0.4 }}
+                      >
+                        <PostCard
+                          post={post}
+                          authUser={authUser}
+                          onLike={handleLike}
+                          onComment={handleComment}
+                          onDelete={handleDelete}
+                          isUserPost={(post.userId || post.user?._id || post.user?.id)?.toString() === uid}
+                        />
+                      </motion.div>
+                    ))}
+                  </div>
+                </AnimatePresence>
               )}
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
 
