@@ -62,6 +62,15 @@ export default function PostCard({ post, authUser, onLike, onComment, onDelete, 
           height: 400,
           display: "flex",
           flexDirection: "column",
+          transition: "all 0.3s ease",
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = "scale(1.03)";
+          e.currentTarget.style.boxShadow = "0 8px 25px rgba(255,0,128,0.6), 0 8px 25px rgba(142,45,226,0.6)";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = "scale(1)";
+          e.currentTarget.style.boxShadow = "none";
         }}
       >
         <div style={{ height: 6, background: "linear-gradient(135deg,#ff4da6,#ff0080)" }} />
