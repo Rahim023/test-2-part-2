@@ -1,15 +1,28 @@
-# MERN Auth Example
-
-This project contains a simple MERN-stack example using:
-**This is my code for all the Previous lab and test i have done evryhting collectively and created  a final version of my project**
-- MongoDB (mongoose)
-- creates a basic structure of my project **(Done by Copilot)**
-- Express backend (JWT auth)
-- React frontend (simple pages: login,Register, forgot password, discussion board)
-- JWT stored in localStorage and sent as Bearer token **(Done by Copilot)**
-- Used react tools like framer motion, animation . react-icons
-- added a POP up model in each post ny creating a grid layout for all screen using bootstrap
-- Used multer for the posting and storing photo option
--Added Bootdtrsp ny installing into project
--Used react router DOM for routing into pages
--added animation and trasnisiiton using custom CSS
+**How to start the project?**
+The code is in Master branch
+ to start run: npm start (Backend and frontend)
+**Project Idea & Development:**
+Initial project idea, planning, and implementation guided and developed **by me.**
+All major design choices, architecture setup, and testing done **by me.**
+Added header, footer , Three component section, Navbar section, Hero section **by me**.
+Added custom CSS, transition lines in background, transition pop up elements, Google fonts added **by me.**
+**Assistance & Code Guidance:**
+Technical guidance, troubleshooting, and some code snippets provided with the help of **ChatGPT (OpenAI GPT-5).**
+Generate the basic structure fro all frontend files **(by Chatgpt)**
+**Technologies & Libraries Referenced**:
+**React.js**
+ – Frontend library for building UI.
+**Bootstrap / React-Bootstrap**
+ – For responsive design and styling.
+**Framer Motion**
+ – For animations.
+**React Icons**
+ – For icons.
+**Node.js**
+ & Express.js
+ – Backend framework.
+**MongoDB**
+ – Database.
+**dotenv**
+ – Environment variable management.
+ 
