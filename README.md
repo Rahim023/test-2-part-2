@@ -1,11 +1,5 @@
 **How to start the project?**
 The code is in Master branch
-to run this code create an .env file in backend add the code below:
-PORT=5000
-MONGO_URL=mongodb://localhost:27017/data
-JWT_SECRET=supersecretkey
- now download the dotenv dependency if not:
- npm install dotenv
  to start run: npm start (Backend and frontend)
 **Project Idea & Development:**
 Initial project idea, planning, and implementation guided and developed **by me.**
